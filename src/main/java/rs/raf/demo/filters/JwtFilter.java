@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import rs.raf.demo.services.UserDetailService;
+import rs.raf.demo.services.UserService;
 import rs.raf.demo.utils.JwtUtil;
 
 import javax.servlet.FilterChain;
@@ -18,10 +18,10 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final UserDetailService userService;
+    private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    public JwtFilter(UserDetailService userService, JwtUtil jwtUtil) {
+    public JwtFilter(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }

@@ -16,17 +16,16 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import rs.raf.demo.filters.JwtFilter;
-import rs.raf.demo.services.UserDetailService;
 import rs.raf.demo.services.UserService;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailService userService;
+    private final UserService userService;
     private final JwtFilter jwtFilter;
 
     @Autowired
-    public SpringSecurityConfig(UserDetailService userService, JwtFilter jwtFilter) {
+    public SpringSecurityConfig(UserService userService, JwtFilter jwtFilter) {
         this.userService = userService;
         this.jwtFilter = jwtFilter;
     }
@@ -46,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/users/add/**").hasAuthority("can_create_users")
+                .antMatchers("/api/users/new/**").hasAuthority("can_create_users")
                 .antMatchers("/api/users/get/**").hasAuthority("can_read_users")
                 .antMatchers("/api/users/update/**").hasAuthority("can_update_users")
                 .antMatchers("/api/users/delete/**").hasAuthority("can_delete_users")
